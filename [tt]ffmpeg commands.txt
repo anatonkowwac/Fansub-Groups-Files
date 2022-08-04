@@ -1,0 +1,13 @@
+ffmpeg Hardware Acceleration Encode (Best IQ)
+0. No Acceleration
+ffmpeg -i [inputfile] -c:v h264 -preset:v veryslow -b:v 20000k -vf ass=sub.ass -c:a aac -b:a 448k [outputfile]
+1. Intel QSV
+ffmpeg -i [inputfile] -c:v hevc_qsv -preset:v veryslow -b:v 20000k -tag:v hvc1 -vf ass=sub.ass -c:a aac -b:a 448k [outputfile]
+2. NVENC
+ffmpeg -i [inputfile] -c:v hevc_nvenc -preset:v p7 -level:v 5.2 -b:v 20000k -tag:v hvc1 -vf ass=sub.ass -c:a copy [outputfile]
+3. AMF
+ffmpeg -i [inputfile] -c:v h264_amf -profile:v high -b:v 20000k -vf ass=sub.ass -c:a aac -b:a 144k [outputfile]
+ffmpeg -i [inputfile] -c:v h264_amf -profile:v constrained_high -b:v 14800k -vf ass=sub.ass -c:a aac -b:a 448k [outputfile]
+4. macOS Videotoolbox
+ffmpeg -i [inputfile] -c:v h264_videotoolbox -profile:v high -level:v 5.2 -b:v 20000k -vf ass=sub.ass -c:a aac -b:a 448k [outputfile]
+
